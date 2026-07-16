@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga World - Sua Loja de Mangás</title>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Elms Sans', sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        #menu-principal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: rgba(0, 0, 0, 0.85);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(255, 69, 0, 0.3);
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .logo span {
+            color: #ff4500;
+        }
+        #menu-principal ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        #menu-principal a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+        #banner-destaque {
+            height: 45dvh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(18, 18, 18, 1)), url('https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=1920') no-repeat center/cover;
+            display: flex;
+            align-items: center;
+            padding: 40px 5%;
+        }
+        .banner-conteudo {
+            max-width: 600px;
+        }
+        .tag-novidades {
+            background-color: #ff4500;
+            color: #ffffff;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .banner-conteudo h1 {
+            font-size: 48px;
+            margin: 10px 0;
+            line-height: 1.2;
+        }
+        .banner-conteudo p {
+            font-size: 16px;
+            color:#cccccc;
+            margin-bottom: 20px;
+        }
+        .botao-destaque {
+            background-color: #ff4500;
+            color: #ffffff;
+            padding: 12px 28px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 100px;
+            transition: 0.3s;
+            display: inline-block;
+        }
+        .botao-destaque:hover {
+            background-color: #e03e00;
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
+        }
+        #catalogo {
+            padding: 10px 5% 60px 5%;
+        }
+        .titulo-secao {
+            font-size: 28px;
+            margin-bottom: 30px;
+            border-left: 4px solid #ff4500;
+            padding-left: 15px;
+        }
+        .grid-mangas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+        .card-manga {
+            background-color: #1c1c1c;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .card-manga img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: 0.5s ease;
+        }
+        .card-info {
+            padding: 15px;
+        }
+        .card-info h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .preco {
+            color: #ff4500;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .bnt-comprar {
+            display:block;
+            text-align: center;
+            background-color: rgba(255, 69, 0, 0.1);
+            color: #ff4500;
+            padding: 8px 0;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: 0.3s;
+            border: 1px solid #ff4500
+        }
+        .card-manga:hover {
+            background-color: #2a2a2a;
+            transform: translateY(-15px);
+            box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
+        }
+        .card-manga:hover img {
+            transform: scale(1.05);
+        }
+        .bnt-comprar:hover {
+            background-color: #ff4500;
+            color: #ffffff;
+        }
+        footer {
+            background-color: #1c1c1c;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        footer span {
+            color: #ff4500;
+            font-weight: 700;
+        }
+        footer h1 {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        #leia-gratis {
+            text-align: center;
+            padding: 20px 20px;
+            margin-top: 60px;
+            background-color: #1c1c1c;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 69, 0, 0.5);
+        }
+        #leia-gratis h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        #leia-gratis p {
+            color: #cccccc;
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin: 0 auto 15px auto;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            #menu-principal {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+                text-align: center;
+            }
+            #menu-principal ul {
+                gap: 15px;
+            }
+            #menu-principal a {
+                font-size: 14px;
+            }
+            .banner-conteudo h1 {
+                font-size: 32px;
+            }
+            .banner-conteudo p {
+        font-size: 14px;
+            }
+            .card-manga img {
+                height: 300px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <nav id="menu-principal">
+        <div class="logo">Manga <span>World</span></div>
+        <ul>
+            <li><a href="#leia-gratis">Leia Grátis</a></li>
+            <li><a href="https://www.instagram.com/rodry_7z/" target="_blank" class="link-externo">Siga o DEV</a></li>
+
+        </ul>
+    </nav>
+
+    <header id="banner-destaque">
+        <div class="banner-conteudo">
+            <span class="tag-novidades">Lançamento</span>
+            <h1>Explore os Melhores Mundos</h1>
+            <p>Os mangás mais populares em uma única plataforma!</p>
+            <a href="#catalogo" class="botao-destaque">Ver Catálogo</a>
+        </div>
+    </header>
+
+    <main id="catalogo">
+        <h2 class="titulo-secao">Ação e Sobrevivência</h2>
+        <div class="grid-mangas">
+            <div class="card-manga">
+                <img src="imagens/atackontitan.jpg" alt="Atack On Titan">
+                <div class="card-info">
+                    <h3>Atack On Titan</h3>
+                    <p class="preco">A partir de R$ 59,18</p>
+                    <a href="https://www.amazon.com.br/Ataque-dos-Tit%C3%A3s-Vol-01/dp/6525905265?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1R576IEASNA63&sprefix=atack+on+titan+manga+2+em+1+portugue%2Caps%2C206&sr=8-1" target="_blank" class="bnt-comprar">Comprar</a>
+                </div>
+            </div>
+            <div class="card-manga">
+                <img src="imagens/akamegakill.jpg" alt="Akame Ga kill">
+                <div class="card-info">
+                    <h3>Akame Ga kill</h3>
+                    <p class="preco">A partir de R$ 66,26</p>
+                    <a href="https://www.amazon.com.br/Akame-GA-Kill-Vol-Ga/dp/0316259462/136-6143864-1121746?content-id=amzn1.sym.068219f2-2859-4ecd-b083-e5bfc6d7772d&psc=1" target="_blank" class="bnt-comprar">Comprar</a>
+                </div>
+            </div>
+            <div class="card-manga">
+                <img src="imagens/chainsawman.jpg" alt="Chainsaw Man">
+                <div class="card-info">
+                    <h3>Chainsaw Man</h3>
+                    <p class="preco">A partir de R$ 33,44</p>
+                    <a href="https://www.amazon.com.br/Chainsaw-Man-Vol-Tatsuki-Fujimoto/dp/6555127333?crid=1CYBXB5QTTQ5U&sprefix=Chainsaw+Man+manga+p%2Caps%2C281&sr=8-1" target="_blank" class="bnt-comprar">Comprar</a>
+                </div>
+            </div>
+            <div class="card-manga">
+                <img src="imagens/vilandsaga.jpg" alt="Viland Saga">
+                <div class="card-info">
+                    <h3>Viland Saga</h3>
+                    <p class="preco">A partir de R$ 39,14</p>
+                    <a href="https://www.amazon.com.br/Vinland-Saga-Deluxe-Vol-1/dp/6555120371?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=1NQ4IQDDRYH9C&sprefix=viland+saga+manga+portugues%2Caps%2C257&sr=8-1" target="_blank" class="bnt-comprar">Comprar</a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="titulo-secao">Suspense e Mistério</h2>
+        <div class="grid-mangas">
+            <div class="card-manga">
+                <img src="imagens/DeathNote.jpg" alt="Death Note">
+                <div class="card-info">
+                    <h3>Death Note</h3>
+                    <p class="preco">A partir de R$ 42,60</p>
+                    <a href="https://www.amazon.com.br/Death-Note-Black-Tsugumi-Ohba/dp/8577876853/ref=sr_1_1?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=2LBTTQ2ZLMU6D&dib=eyJ2IjoiMSJ9.BXcoGOTQLVBEPGT5QYj75OzS4bR1NiWLyB0H2lPzFgARwMMEDoIVToE9EFcfLCPzudsanguR8Z3Df6bztzf0cvoK9fqhf9a4W-vR2oeGXeQelAnXReL-ta-16Uh3GG1EcWO-jztscv5SPTXbWhWH16wwH_hePrHZ3iixgJoU2m6rpzroD1b7BmV7PAeZShhg-gqfwzwh_7tEjWcdCQv2N_QsbcVjjFeoM-NnQq9AXC0.ntPzqGKIxHyE4evZH1kCoAVvAy0CYVVpTLa5_tNiC7c&dib_tag=se&keywords=death+note+vol1+portugues&qid=1784165104&s=books&sprefix=death+note+vol1+portugue%2Cstripbooks%2C247&sr=1-1" target="_blank" class="bnt-comprar">Comprar</a>
+                </div>
+            </div>
+            <div class="card-manga">
+                <img src="imagens/tokyoghoul.jpg" alt="Tokyo Ghoul">
+                <div class="card-info">
+                    <h3>Tokyo Ghoul</h3>
+                    <p class="preco">A partir de R$ 59,90</p>
+                    <a href="https://www.amazon.com.br/Tokyo-Ghoul-Vol-Sui-Ishida/dp/1421580365/ref=sr_1_1?crid=3R1GREGDQRKTO&dib=eyJ2IjoiMSJ9.di2RJYhWCEytpJHcsaBQLaRSqoQnHstQbrL55yS4IXdoo0kQq4tkBnzNo_PR3yN_fnIBcEmqDNJSlEuuSnD3BPyS5yEcyh7j0Mnk-bv72O3VWCm-VCBKK0evDqkYd3dMBJURJZV8nTRdG_MNBLvKMJgB6gst4GujBU0_kWlydkqQeUdKS5-HdbMLCj0rwY57PskbOhcPQD5dMnCFj_8H9rNnrCL1EU-Ki-9j5JGu79I.EaNWBWQIYLnpseAvkKyiCRnUIPwfE15aCzlyhl26j_U&dib_tag=se&keywords=tokyo+ghoul+vol+1&qid=1784165237&s=books&sprefix=tokyo+ghoul+%2Cstripbooks%2C346&sr=1-1&ufe=app_do%3Aamzn1.fos.6d798eae-cadf-45de-946a-f477d47705b9" target="_blank" class="bnt-comprar">Comprar</a>
+                </div>
+            </div>
+                <div class="card-manga">
+                    <img src="imagens/hellsparadise.jpg" alt="Hells Paradise">
+                    <div class="card-info">
+                        <h3>Hells Paradise</h3>
+                        <p class="preco">A partir de R$ 69,00</p>
+                        <a href="https://www.amazon.com.br/Hell%C2%B4s-Paradise-01-Yuji-Kaku/dp/6559600912/ref=sr_1_1?crid=3FNC0EQPEBQPK&dib=eyJ2IjoiMSJ9.xY5akkuQbvzh5C5-tpkdxA37yfOWgWqvTklaXnXMrcwd5qo0CeZKLwifFeIwRCJnvEf6a97_tWqppsV5RhucYT00vHNaROpa0pB7dKn8qdz4fqazp1TR56ADA4oCVuMCWt7nXVUarr3B_3C_18o8c03XOad577BF3dIkefSwTcJN26yyRuwEkYk9S_stojBdePw_cX18QBQUGaZ-9yQoVxqunKZPFnpzl0r6eOSwRz0.Oi7jk21iV9nXW_HHJNc6TlzThC1oG35llpar6F5dj4w&dib_tag=se&keywords=hells+paradise+1&qid=1784165297&s=books&sprefix=hells+para%2Cstripbooks%2C270&sr=1-1" target="_blank" class="bnt-comprar">Comprar</a>
+                    </div>
+                </div>
+                <div class="card-manga">
+                    <img src="imagens/jojo.jpg" alt="Jojo Bizarre Adventure">
+                    <div class="card-info">
+                        <h3>Jojo Bizarre Adventure</h3>
+                        <p class="preco">A partir de R$ 52,31</p>
+                        <a href="https://www.amazon.com.br/Jojos-bizarre-adventure-parte-phantom/dp/8542611810/ref=sr_1_1?crid=BOCXRGUSNJJX&dib=eyJ2IjoiMSJ9.M9NipTGqOkGh1BLT-ycnrips-cy9EGjpMuYJLh8-UL-fnmMgTREVE5AsfmHI7yvhgsWds0cFeJ4IPWuYLi5Q6UatLm6L2ucbflSd0vzjvZoLDzm6V4MyXK2miyHueftgCmxiNcBaNeFnKoKFS7wbVLy7a_MTD7kGdIcDYEL_8-CUrvHvH9SUp-DSLAx9pjQaFWcePFETdJlnjNEhAAKfQrvxWQa3ZKYl5PvndYbq1q2DVeh8H8IBBeiVI188pg7hjdfEFEs_O_yr5AzK9rzP6LKkP3egS5FrrezeIRJ4a4w.nLaGHkJv0hGfqvMuFDhGrnELSk9hE8jnG8QHVLr0HSM&dib_tag=se&keywords=jojo+bizarre+adventure+1&qid=1784165376&sprefix=jojo+bizarre+adventure+1%2Caps%2C236&sr=8-1&ufe=app_do%3Aamzn1.fos.6d798eae-cadf-45de-946a-f477d47705b9" target="_blank" class="bnt-comprar">Comprar</a>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="titulo-secao">Romance e Drama</h2>
+            <div class="grid-mangas">
+                <div class="card-manga">
+                    <img src="imagens/yourname.jpg" alt="Your Name">
+                    <div class="card-info">
+                        <h3>Your Name</h3>
+                        <p class="preco">A partir de R$ 31,54</p>
+                        <a href="https://www.amazon.com.br/Your-name-Makoto-Shinkai/dp/8576867222?crid=1FVG04W5ZC392&sprefix=manga+your+name%2Caps%2C329&sr=8-1" target="_blank" class="bnt-comprar">Comprar</a>
+                    </div>
+                </div>
+                <div class="card-manga">
+                    <img src="imagens/dressup.jpg" alt="My Dress-Up Darling">
+                    <div class="card-info">
+                        <h3>My Dress-Up Darling</h3>
+                        <p class="preco">A partir de R$ 37,90</p>
+                        <a href="https://www.amazon.com.br/Sono-Bisque-Doll-Shinichi-Fukuda/dp/652591437X?sr=8-1" target="_blank" class="bnt-comprar">Comprar</a>
+                    </div>
+                </div>
+                <div class="card-manga">
+                    <img src="imagens/loveiswar.png" alt="Love Is War">
+                    <div class="card-info">
+                        <h3>Love Is War</h3>
+                        <p class="preco">A partir de R$ 50,00</p>
+                        <a href="https://www.amazon.com.br/Love-War-Kaguya-Sama-Vol/dp/6555128135/ref=sr_1_2?crid=EBSZYODP8GPG&dib=eyJ2IjoiMSJ9.OAk9DKgSIIvnttAYI2QQCGiCVNJAcYuqtyKSu9yg-i8XorlUPDdlkj3fRmndGjZzRVN080odeUhCNpxXX_SjhXebjYne8n4ZM0-BC0B-B0NbAxN3tVBfS_lPbZ4-NE1Jf6xZMiJnGWyZQafIHqj5eaKKbkaNB3CO-bEnLrbciZw7jWgqnszIs2tkAD8QF7a63uVGWO-D5747Di410tbcvk9j6Wi_00KzmY2cMJ88I6to8a0pH7b7vhj3W61pUANowFJwXzEohWGBWEQKR9-WNgHiCOvm9Qfio7q2TljWEHw.eIAUI1hNbLo3Ns1kHZn-Cmp_neqdrG8P2JJ3r9ArFaY&dib_tag=se&keywords=kaguya+sama+1&qid=1784165459&sprefix=kaguya%2Caps%2C251&sr=8-2-1" target="_blank" class="bnt-comprar">Comprar</a>
+                    </div>
+                </div>
+            
+                <div class="card-manga">
+                    <img src="imagens/horimiya.jpg" alt="Horimiya">
+                    <div class="card-info">
+                        <h3>Horimiya</h3>
+                        <p class="preco">A partir de R$ 32,01</p>
+                        <a href="https://www.amazon.com.br/Horimiya-Vol-1-Hero/dp/655960702X/ref=sr_1_1?crid=1E1IJRO0QU35E&dib=eyJ2IjoiMSJ9.NsSBSoBbeHjRP4WN1P52tXPJtT0zwCmENVkrvioVenwVTykf2CFYT7MywJ8f7o-kicr3mQZydjL9m0vuHeu2xA5SA-htNH8iF5tM06lRXdiOtO2V_MTr4vhTIE0Y5UkfxH7g_KRbYjIGVP1Iv4VG4FllngzMNVc7dggkRsFJeyGBAae5s_IpdBh67opcZjT8ZTa2RqNeNlP6HLQpMPrh3ZTI0P-ycK1SV1bbpa3peXbTzDQ9H-27Gb7dukq9oLUtvV_610WijR9FU6TuypH7-nkjiG8VKOVtu3r_-m0JWFs.CbPtQWJwOl4W0UHHSQPx6W3n1HTtpm4pAkTXoPzYR-w&dib_tag=se&keywords=horimiya+vol+1&qid=1784165550&sprefix=horimiya+v%2Caps%2C241&sr=8-1" target="_blank" class="bnt-comprar">Comprar</a>
+                    </div>
+                </div>
+            </div>
+        
+
+        <h2 class="titulo-secao">Esportes</h2>
+        <div class="grid-mangas">
+            <div class="card-manga">
+                <img src="imagens/Haikyu.jpg" alt="Haikyu">
+                <div class="card-info">
+                    <h3>Haikyu!!</h3>
+                    <p class="preco">A partir de R$ 41,30</p>
+                    <a href="https://www.amazon.com.br/Haikyu-Vol-01-haruichi-Furudate/dp/6555941294?sr=8-1" target="_blank" class="bnt-comprar">Comprar</a>
+                </div>
+            </div>
+            <div class="card-manga">
+                <img src="imagens/bluelock.jpg" alt="Blue Lock">
+                <div class="card-info">
+                    <h3>Blue Lock</h3>
+                    <p class="preco">A partir de R$ 30,49</p>
+                    <a href="https://www.amazon.com.br/Blue-Lock-01-Muneyuki-Kaneshiro/dp/6525901502?crid=3E6G0FCX9WEEU&sprefix=blue+lock+manga%2Caps%2C266&sr=8-1" target="_blank" class="bnt-comprar">Comprar</a>
+                </div>
+            </div>
+            <div class="card-manga">
+                <img src="imagens/aoashi.jpg" alt="Ao Ashi">
+                <div class="card-info">
+                    <h3>Ao Ashi</h3>
+                    <p class="preco">A partir de R$ 20,50</p>
+                    <a href="https://www.amazon.com.br/Ao-Ashi-Vol-Yugo-Kobayashi/dp/655594384X/ref=sr_1_1?adgrpid=81616035339&dib=eyJ2IjoiMSJ9.Rw5q5h4yt1jGuaNiZ6YFm82otGfwFw9JnIBn-agam0Xr2LvMM9Qt9IglLoPedIkAAKyJpJq1fpZ-xg3JAKblb3fcOpQTME6fiR9Hu6IEHtYiDd8J8mPq25by6wUOAU6IPNUgthHbh03Y6IkO0lTYvnZhOeR8OXhnUpdKWnv8rKqvdIMa_WrjMRkvmHdA0YKb3kUmQJrnj27SHhhjxIztbPsJMSZa4661fY3bxdtqMBi4WRkVqgvaw7qkI948dB-S5GN8QzdlPKU3T7hIfMoxUBUoadi1H693qHZVy3yzAEc.-Z81MmX_7Os7FokI0uHsUTmttInn7ZBH10FGgXO0akQ&dib_tag=se&hvadid=595903198073&hvdev=c&hvexpln=0&hvlocphy=20100&hvnetw=g&hvocijid=15691033144689798764--&hvqmt=e&hvrand=15691033144689798764&hvtargid=kwd-2464021446928&hydadcr=2071_13490843&keywords=ao+ashi+manga+amazon&mcid=a75f099643273c3bbf410b960115ffc6&qid=1784163753&sr=8-1" target="_blank" class="bnt-comprar">Comprar</a>   
+                </div>
+            </div>
+            <div class="card-manga">
+                <img src="imagens/hajimenoippo.jpg" alt="Hajime No Ippo">
+                <div class="card-info">
+                    <h3>Hajime No Ippo</h3>
+                    <p class="preco">A partir de R$ 34,51</p>
+                    <a href="https://www.amazon.com.br/Hajime-no-Ippo-Joji-Morikawa/dp/6583627213/ref=sr_1_1?__mk_pt_BR=%C3%85M%C3%85%C5%BD%C3%95%C3%91&crid=394I3W11L022H&dib=eyJ2IjoiMSJ9.6Fivgd69iHJQgOR7gwyeaS823tJHa4-yqIh0bw-3ESuFPJURPkB75b7vETn-n3Yh1povjn7LAs6w4yjwEMRkXqEMqO4yCo61JI0JgDwmftveFZ5iLixLYyiO9qOMqZQLhkuY3G7I1PANTEFsTyniUap0eU-kEfv3GKsZXH0dikqLg0f3mLyo3NjG7F51DwY-WbuJyKTlkjn8eppYPD5rxGb8l2aVFMZTnmjc9dZZ1Wt3ZvgolkhbutoS3z2Rw66WWWNHGHkDfWiWBGh-6rgneegT_aFNaXPPzXW613wYCes.gpL11ZZY8JBvqSerag1dPPGq5y8_Yopf2TtcFc8E-D0&dib_tag=se&keywords=Hajime+no+Ippo+vol+1+portugues&qid=1784164026&sprefix=hajime+no+ippo+vol+1+portugues%2Caps%2C232&sr=8-1" target="_blank" class="bnt-comprar">Comprar</a>
+                </div>
+            </div>
+        </div>
+
+        <section id="leia-gratis">
+            <h2>Quer ler online gratuitamente?</h2>
+            <p>Acesse o leitor favorito do DEV para ler milhares de capítulos de forma gratuita.</p>
+            <a href="https://mangadex.org/" target="_blank" class="botao-destaque">Ir para o MangaDex</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 <span>Manga World</span></p>
+        <h1>Feito para o trabalho de HTML/CSS - IFPI Informática.</h1>
+    </footer>
+
+</body>
+</html>
